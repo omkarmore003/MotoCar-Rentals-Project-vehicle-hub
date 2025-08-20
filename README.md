@@ -45,7 +45,7 @@ This project includes vehicle listings, location-based filtering, cart & checkou
 ## 🚀 Installation & Setup
 
 ### 1️⃣ Clone the Repository
-git clone https://github.com/yourusername/MotoCar-Rentals-Project-vehicle-hub.git
+git clone https://github.com/omkarmore003/MotoCar-Rentals-Project-vehicle-hub.git
 cd MotoCar-Rentals-Project-vehicle-hub
 
 ### 2️⃣ Create & Activate Virtual Environment
