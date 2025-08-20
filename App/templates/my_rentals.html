@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Rentals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .rental-card {
+            display: flex;
+            flex-direction: row;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .rental-card img {
+            width: 40%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .rental-details {
+            padding: 15px;
+            width: 60%;
+        }
+
+        .vehicle-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .detail {
+            margin: 8px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .detail span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .price {
+            font-size: 18px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .no-rentals {
+            text-align: center;
+            color: red;
+            font-size: 18px;
+            margin-top: 50px;
+        }
+
+     
+    </style>
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<section class="section-rentals">
+    <div class="container">
+        <!-- <h2>My Rentals</h2> -->
+        {% if rentals %}
+            {% for rental in rentals %}
+            <div class="rental-card">
+              
+                {% if rental.car %}
+                    <img src="{{ rental.car.image.url }}" alt="Car Image">
+                {% elif rental.bike %}
+                    <img src="{{ rental.bike.image.url }}" alt="Bike Image">
+                {% endif %}
+                
+              
+                <div class="rental-details">
+                    <p class="vehicle-name">
+                        {% if rental.car %}
+                            {{ rental.car.name }}
+                        {% elif rental.bike %}
+                            {{ rental.bike.name }}
+                        {% endif %}
+                    </p>
+                    <p class="detail">
+                        <span>Vehicle Type:</span> 
+                        {% if rental.car %}
+                            Car
+                        {% elif rental.bike %}
+                            Bike
+                        {% endif %}
+                    </p>
+                    <p class="detail">
+                        <span>Fuel Type:</span> 
+                        {% if rental.car %}
+                            {{ rental.car.fuel_type }}
+                        {% elif rental.bike %}
+                            {{ rental.bike.fuel_type }}
+                        {% endif %}
+                    </p>
+                    
+                
+                    {% if rental.delivery_type == 'pickup' %}
+                    <p class="detail">
+                        <span>Pickup Location:</span> {{ rental.pickup_location }}
+                    </p>
+                    <p class="detail">
+                        <span>Pickup Date:</span> {{ rental.pickup_date|date:"M d, Y" }}
+                    </p>
+                    <p class="detail">
+                        <span>Pickup Time:</span> {{ rental.pickup_time|time:"h:i A" }}
+                    </p>
+                    {% elif rental.delivery_type == 'delivery' %}
+                    <p class="detail">
+                        <span>Delivery Location:</span> {{ rental.delivery_location }}
+                    </p>
+                    <p class="detail">
+                        <span>Delivery Date:</span> {{ rental.delivery_date|date:"M d, Y" }}
+                    </p>
+                    <p class="detail">
+                        <span>Delivery Time:</span> {{ rental.delivery_time|time:"h:i A" }}
+                    </p>
+                    {% endif %}
+                    
+                
+                    <p class="detail">
+                        <span>Return Date:</span> {{ rental.return_date|date:"M d, Y" }}
+                    </p>
+                    <p class="detail">
+                        <span>Return Time:</span> {{ rental.return_time|time:"h:i A" }}
+                    </p>
+                    
+                    <p class="price">
+                        <span>Total Price:</span> ₹{{ rental.total_price }}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <p class="no-rentals">No rentals found.</p>
+        {% endif %}
+    </div>
+</section>
+
+</body>
+</html>
+{% include 'footer.html' %}
