@@ -25,7 +25,7 @@ This project includes vehicle listings, location-based filtering, cart & checkou
 ---
 
 ## 📂 Project Structure
-
+```
 │── MotoCar/
 │   │── App/                # Main Django App
 │   │   │── models.py       # Database Models (Car, Bike, Cart, Rentals)
@@ -39,7 +39,7 @@ This project includes vehicle listings, location-based filtering, cart & checkou
 │── db.sqlite3              # SQLite Database
 │── requirements.txt        # Dependencies
 │── README.md               # Project Documentation
-
+```
 ---
 
 ## 🚀 Installation & Setup
